@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shop_keeping/utility/create_product_nav_function.dart';
@@ -70,11 +69,11 @@ class _UploadProduct extends State<UploadProduct> {
                     padding: const EdgeInsets.all(8.0),
                     child: IconButton.outlined(
                       onPressed: pickImage,
-                      icon: Icon(Icons.browse_gallery_outlined),
+                      icon: Icon(Icons.image),
                       tooltip: "Select a photo from Gallery",
                       color: Colors.black54,
                     ),
-                    // OutlinedButton(onPressed: pickImage, child: Text("Select a photo")),
+
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -143,9 +142,9 @@ class _UploadProduct extends State<UploadProduct> {
   }
 
   //Image Picker Function to take photo using native camera
+
   Future<void> captureImage() async {
     final capturedFile = await picker.pickImage(source: ImageSource.camera);
-
     if (capturedFile != null) {
       final bytes = await capturedFile.readAsBytes();
       setState(() {
@@ -153,6 +152,7 @@ class _UploadProduct extends State<UploadProduct> {
       });
     }
   }
+
 
   //Submission Function
   Future submit() async {

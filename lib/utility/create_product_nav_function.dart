@@ -12,17 +12,6 @@ Widget buildTextForm(controller, keyboardType, String label) {
   );
 }
 
-//Delete button widget
-Widget deleteOption(onPressed) {
-  return IconButton(
-    onPressed: (){
-      onPressed;
-    },
-    icon: Icon(Icons.delete_forever_outlined),
-    style: IconButton.styleFrom(surfaceTintColor: Colors.red),
-  );
-}
-
 //Edit button Widget
 Widget editOption(editFunction) {
   return IconButton(

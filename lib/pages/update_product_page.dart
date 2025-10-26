@@ -81,11 +81,10 @@ class _UpdateProduct extends State<UpdateProduct> {
                     padding: const EdgeInsets.all(8.0),
                     child: IconButton.outlined(
                       onPressed: pickImage,
-                      icon: Icon(Icons.browse_gallery_outlined),
+                      icon: Icon(Icons.image),
                       tooltip: "Select a photo from Gallery",
                       color: Colors.black54,
                     ),
-                    // OutlinedButton(onPressed: pickImage, child: Text("Select a photo")),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

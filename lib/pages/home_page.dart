@@ -24,7 +24,7 @@ class _MyHomePage extends State<MyHomePage> {
   List<Product> products = []; //original query
   TextEditingController searchController = TextEditingController();
   List<Product> filteredProducts = []; //filter query
-  Timer? _debounce;// timer to limit search option to keystroke pause
+  Timer? _debounce; // timer to limit search option to keystroke pause
 
   @override
   void initState() {
@@ -47,7 +47,6 @@ class _MyHomePage extends State<MyHomePage> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -66,25 +65,25 @@ class _MyHomePage extends State<MyHomePage> {
       ),
 
       body: SafeArea(
-        child:
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: searchController,
-                    decoration: InputDecoration(
-                      hintText: 'Search products...',
-                      prefixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    onChanged: onSearchChanged,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: searchController,
+                decoration: InputDecoration(
+                  hintText: 'Search products...',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                Expanded(
-                  child: filteredProducts.isEmpty
+                onChanged: onSearchChanged,
+              ),
+            ),
+            Expanded(
+              child:
+                  filteredProducts.isEmpty
                       ? Center(child: Text('No products found.'))
                       : GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -103,95 +102,104 @@ class _MyHomePage extends State<MyHomePage> {
                           } //checks for null values of product image
 
                           return Card(
-                                elevation: 3,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
+                            elevation: 3,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Product Image
+                                AspectRatio(
+                                  aspectRatio: 1, // keeps image square
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(12),
+                                    ),
+                                    child:
+                                        imageBytes != null
+                                            ? Image.memory(
+                                              imageBytes,
+                                              fit: BoxFit.cover,
+                                              width: double.infinity,
+                                            )
+                                            : Container(
+                                              color: Colors.grey[300],
+                                              child: Icon(
+                                                Icons.image_not_supported,
+                                                size: 50,
+                                              ),
+                                            ),
+                                  ),
                                 ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    // Product Image
-                                    AspectRatio(
-                                      aspectRatio: 1, // keeps image square
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.vertical(
-                                          top: Radius.circular(12),
+
+                                // Product Details
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        product.name,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
                                         ),
-                                        child:
-                                            imageBytes != null
-                                                ? Image.memory(
-                                                  imageBytes,
-                                                  fit: BoxFit.cover,
-                                                  width: double.infinity,
-                                                )
-                                                : Container(
-                                                  color: Colors.grey[300],
-                                                  child: Icon(
-                                                    Icons.image_not_supported,
-                                                    size: 50,
-                                                  ),
-                                                ),
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                    ),
-
-                                    // Product Details
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            product.name,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16,
-                                            ),
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          SizedBox(height: 4),
-                                          Text(
-                                            '₦${product.price}',
-                                            style: TextStyle(
-                                              color: Colors.green[700],
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Qty: ${product.quantity}',
-                                            style: TextStyle(
-                                              color: Colors.grey[600],
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ],
+                                      SizedBox(height: 4),
+                                      Text(
+                                        '₦${product.price}',
+                                        style: TextStyle(
+                                          color: Colors.green[700],
+                                          fontSize: 14,
+                                        ),
                                       ),
-                                    ),
-
-                                    // Action Buttons
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 4.0,
-                                        vertical: 4,
+                                      Text(
+                                        'Qty: ${product.quantity}',
+                                        style: TextStyle(
+                                          color: Colors.grey[600],
+                                          fontSize: 12,
+                                        ),
                                       ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          editOption(() => editPageRoute(product)),
-                                          deleteOption(() => deleteFunction(product.id)),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              );
+
+                                // Action Buttons
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 4.0,
+                                    vertical: 4,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      editOption(() => editPageRoute(product)),
+                                      IconButton(
+                                        onPressed: ()=> deleteFunction(product),
+                                        icon: Icon(
+                                          Icons.delete_forever_outlined,
+                                        ),
+                                        style: IconButton.styleFrom(
+                                          surfaceTintColor: Colors.red,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
                         },
                       ),
-                ),
-              ],
             ),
+          ],
+        ),
       ),
     );
   }
@@ -231,7 +239,7 @@ class _MyHomePage extends State<MyHomePage> {
   }
 
   //Delete Functionality
-  deleteFunction(id) {
+  deleteFunction(Product product) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -244,9 +252,10 @@ class _MyHomePage extends State<MyHomePage> {
               child: Text('Cancel'),
             ),
             TextButton(
-              onPressed: () async{
+              onPressed: () async {
+                final id = product.id;
                 final dbHelper = DatabaseHelper();
-                await dbHelper.deleteProduct(id);
+                await dbHelper.deleteProduct(id!);
                 if (!context.mounted) return;
                 Navigator.pop(context);
                 fetchProducts();
@@ -258,5 +267,4 @@ class _MyHomePage extends State<MyHomePage> {
       },
     );
   }
-
 }
