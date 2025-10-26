@@ -1,16 +1,12 @@
 # shop_keeping
 
-A HNG13 shopkeeper app
+An HNG13 shopkeeper app
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This Flutter project utilizes SQL plugin, sqflite to implement CRUD functionalites. As a shop keeping app, it allows users the ability to add new inventory to the exsisting database, to browse through and keep track of inventory quantity and price, to edit product data (when relevant) and to delete out-of-stock inventory. It utilizes image_picker plugin to allow users capture images of inventory dataset with the use of the native camera. 
+This app also includes a searchbar functionality that allows for ease of search for inventory items
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Google Drive Link to Video WalkThrough:https://drive.google.com/file/d/1fxCwhf0zIMtaqmbpZLmvX3LsEpDsfSMG/view?usp=drive_link
+GitHub Link: https://github.com/MikeTheExpert/shopKeeper.git
+App APK:
